@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timer</title>
+    <style>
+      body {
+        background-color: #2d2d2d;
+        color: powderblue;
+      }
+    </style>
+  </head>
+  <body>
+    <center>
+      <h2>
+        <label for="">Choose Minutes</label>
+        <select name="Minutes" id="minutes" onclick="minDisplay()"></select>
+        <label for="">Choose Seconds</label>
+        <select name="Seconds" id="seconds" onclick="secDisplay()"></select>
+      </h2>
+      <h1 style="font-size: 100px">
+        <span id="min">00</span> <sub>min</sub> <span id="sec">00</span>
+        <sub>sec</sub>
+      </h1>
+      <button onclick="Start()">Start</button>
+      <button onclick="reset()">Reset</button>
+    </center>
+  </body>
+  <script>
+    function main() {
+      let parent = document.getElementById("minutes");
+      for (let i = 0; i < 60; i++) {
+        let child = document.createElement("option");
+        if (i < 10) {
+          child.innerText = `0${i}`;
+          child.value = i;
+        } else {
+          child.innerText = i;
+          child.value = i;
+        }
+
+        parent.appendChild(child);
+      }
+      let parent2 = document.getElementById("seconds");
+      for (j = 0; j <= 59; j++) {
+        let child2 = document.createElement("option");
+        if (j < 10) {
+          child2.innerText = `0${j}`;
+          child2.value = j;
+        } else {
+          child2.innerText = j;
+          child2.value = j;
+        }
+        parent2.appendChild(child2);
+      }
+    }
+    main();
+    function minDisplay() {
+      let minutes = document.getElementById("minutes").value;
+      document.getElementById("min").innerText = minutes;
+    }
+    function secDisplay() {
+      let seconds = document.getElementById("seconds").value;
+      document.getElementById("sec").innerText = seconds;
+    }
+
+    function Start(m, n) {
+      let audio = new Audio("audio.mp3");
+      let minutes = document.getElementById("minutes").value;
+      let seconds = document.getElementById("seconds").value;
+      let interval = setInterval(() => {
+        // seconds--
+        document.getElementById("sec").innerText = --seconds;
+
+        if (seconds == 0) {
+          if (minutes == 0) {
+            audio.play();
+            return clearInterval(interval);
+          }
+          document.getElementById("min").innerText = --minutes;
+          seconds = 60;
+        }
+        if (minutes == 0) {
+        }
+      }, 1000);
+    }
+    function reset() {
+      location.reload();
+    }
+  </script>
+</html>

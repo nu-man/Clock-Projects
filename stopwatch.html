@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stopwatch</title>
+    <style>
+        body {
+          background-color: #2d2d2d;
+          color: powderblue;
+        }
+      </style>
+  </head>
+  <body>
+    <center>
+      <h1 style="font-size: 100px">
+        <span id="min">00</span> <sub>min</sub> <span id="sec">00</span>
+        <sub>sec</sub>
+      </h1>
+      <button onclick="Start()">Start</button>
+      <button onclick="reset()">Reset</button>
+    </center>
+  </body>
+  <script>
+    function Start(m, n) {
+      let minutes = document.getElementById("min").innerText;
+      let seconds = document.getElementById("sec").innerText;
+      let interval = setInterval(() => {
+        document.getElementById("sec").innerText = ++seconds;
+        if(seconds==59){
+            seconds=0
+            document.getElementById("min").innerText=++minutes
+            
+        }
+      }, 1000);
+    }
+
+    function reset() {
+      location.reload();
+    }
+  </script>
+</html>

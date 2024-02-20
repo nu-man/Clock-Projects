@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm</title>
+</head>
+<body>
+    <center>
+        <h2>Current time is : <span id="time"></span> </h2>
+    </center>
+    <form>
+        <label for="">Select a time:</label>
+        <input type="time" id="iptime" name="iptime">
+        <button type="button" onclick="submitAlarm()">Submit</button>
+    </form>
+    
+</body>
+<script>
+    function updateTime() {
+        var time=document.getElementById("time")
+        var now=new Date()
+        now=now.toLocaleTimeString()
+        time.innerText=now
+    }
+
+    updateTime(); // Call once to update the time immediately
+    setInterval(updateTime, 1000); // Update the time every second
+
+    function submitAlarm() {
+        const ring=new Audio("alarm.mp3")
+    let a = new Date();
+    let b = new Date(document.getElementById("iptime").value);
+
+    let timeDifference = b.getTime() - a.getTime(); // Calculate time difference in milliseconds
+    console.log(b.getTime())
+
+    setTimeout(() => {
+        alert("Time to wake up");
+        ring.play()
+    }, timeDifference);
+}
+
+    
+
+
+</script>
+</html>

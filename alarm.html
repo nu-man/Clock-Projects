@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alarm</title>
+</head>
+<body>
+   <div>
+    <center>
+        <h2>Current time is : <span id="time"></span> </h2>
+        <h2>Alarm<h2></h2>
+        <div>
+            <h3>
+                <label for="Hours">Choose Minutes</label>
+                <select name="Hours" id="hours"></select>
+                <label for="Minutes">Choose Seconds</label>
+                <select name="Minutes" id="minutes"></select>
+                <button onclick="setalarm()">Set Alarm</button>
+              </h2>
+           </div>
+    </center>
+   </div>
+   
+   
+    
+</body>
+<script>
+    function updatetime(){
+        var time=document.getElementById("time")
+        var now=new Date()
+        now=now.toLocaleTimeString()
+        time.innerText=now
+       
+    }
+    updatetime()
+    setInterval(updatetime,1000)
+    
+    function main(){
+        let parent = document.getElementById("hours");
+      for (let i = 0; i < 24; i++) {
+        let child = document.createElement("option");
+        if(i==0){
+            child.innerText = `12 AM`;
+          child.value = `12 AM`;
+        }
+
+        else if (i < 12) {
+          child.innerText = `${i} AM`;
+          child.value = `${i} AM`;
+        } 
+        else if(i==12){
+            child.innerText =`${i} PM`;
+          child.value = `${i} PM`
+        }
+            else {
+          child.innerText =`${i -12} PM`;
+          child.value = `${i} PM`;
+        }
+
+        parent.appendChild(child);
+      }
+      let parent2 = document.getElementById("minutes");
+      for (j = 0; j <= 59; j++) {
+        let child2 = document.createElement("option");
+        if (j < 10) {
+          child2.innerText = `0${j} Minutes`;
+          child2.value =  `0${j} Minutes`;
+        } else {
+          child2.innerText =  `${j} Minutes`;
+          child2.value =  `${j} Minutes`;
+        }
+        parent2.appendChild(child2);
+      }
+    }
+    main()
+
+
+    function setalarm(){
+        let hours=parseInt(document.getElementById("hours").value)
+        let minutes=parseInt(document.getElementById("minutes").value)
+        var current=new Date()
+        let selected=new Date(`${hours}${minutes}`)
+        console.log(selected);
+
+    }
+    
+</script>
+</html>
